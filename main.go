@@ -4,6 +4,8 @@ import (
 	"errors"
 	"fmt"
 	"os"
+
+	"github.com/ItsMeViipeR/taskmaster/storage"
 )
 
 func main() {
@@ -16,7 +18,12 @@ func main() {
 
 	switch args[1] {
 	case "add":
-		fmt.Println("Add")
+		json := storage.NewJSON("tasks.json")
+
+		if load_err := json.Load(); load_err != nil {
+			fmt.Println(load_err)
+			return
+		}
 	case "remove":
 		fmt.Println("Remove")
 	case "done":
